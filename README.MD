@@ -29,7 +29,7 @@ $ git clone https://github.com/WillianMedeiros14/ignite-ReactNative-desafio-chap
 # Entre na pasta do projeto.
 $ cd ignite-ReactNative-desafio-chapter-1
 
-# Istale as dependências
+# Instale as dependências
 $ yarn
 
 # Execute a aplicação (Android)
