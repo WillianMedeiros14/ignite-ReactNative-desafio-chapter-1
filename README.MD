@@ -17,9 +17,10 @@ Este modulo teve como abordagem assuntos básicos do React Native, e já inician
 
 ## 💬 Funcionalidades
 
-- Adcionar tarefa
-- Marcar e desmarcar tarefa clicando sobre a mesma
-- Exluir tarefa pressionando sobre a escolhida.
+- Adcionar tarefa;
+- Marcar e desmarcar tarefa clicando sobre a mesma;
+- Exluir tarefa pressionando sobre a escolhida;
+- Alterar entre o tema Claro e Escuro.
 
 ## 🎲 Executar aplicação
 ```bash
@@ -29,7 +30,7 @@ $ git clone https://github.com/WillianMedeiros14/ignite-ReactNative-desafio-chap
 # Entre na pasta do projeto.
 $ cd ignite-ReactNative-desafio-chapter-1
 
-# Istale as dependências
+# Instale as dependências
 $ yarn
 
 # Execute a aplicação (Android)

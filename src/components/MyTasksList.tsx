@@ -1,13 +1,6 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet, FlatListProps } from 'react-native';
-
-function FlatListHeaderComponent() {
-  return (
-    <View>
-      <Text style={styles.header}>Minhas tasks</Text>
-    </View>
-  )
-}
+import { theme } from '../Themes/Themas';
 
 interface MyTasksListProps {
   tasks: {
@@ -15,11 +8,29 @@ interface MyTasksListProps {
     title: string;
     done: boolean;
   }[];
+  Theme: {
+    tasksMarkers: string;
+    colorBorder: string;
+    minhasTasks: string;
+  };
   onPress: (id: number) => void;
   onLongPress: (id: number) => void;
 }
 
-export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
+let colorTitulo = theme.light.minhasTasks;
+
+function FlatListHeaderComponent() {
+  return (
+    <View>
+      <Text style={[styles.header, {color: colorTitulo }]}>Minhas tasks</Text>
+    </View>
+  )
+}
+
+export function MyTasksList({Theme, tasks, onLongPress, onPress }: MyTasksListProps) {
+
+  colorTitulo = Theme.minhasTasks;
+
   return (
     <FlatList
       data={tasks}
@@ -37,18 +48,22 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
             <View 
               testID={`marker-${index}`}
               //TODO - use style prop 
-              style={item.done ? styles.taskMarkerDone : styles.taskMarker}
+              style={[item.done ? styles.taskMarkerDone : styles.taskMarker,
+                {borderColor: Theme.colorBorder}
+              ]}
             />
             <Text 
               //TODO - use style prop
-              style={item.done ? styles.taskTextDone : styles.taskText}
+              style={[item.done ? styles.taskTextDone : styles.taskText,
+                {color: Theme.tasksMarkers}
+              ]}
             >
               {item.title}
             </Text>
           </TouchableOpacity>
         )
       }}
-      ListHeaderComponent={<FlatListHeaderComponent />}
+      ListHeaderComponent={<FlatListHeaderComponent/>}
       ListHeaderComponentStyle={{
         marginBottom: 20
       }}
@@ -60,11 +75,12 @@ export function MyTasksList({ tasks, onLongPress, onPress }: MyTasksListProps) {
   )
 }
 
+
 const styles = StyleSheet.create({
   header: {
     color: '#3D3D4D',
     fontSize: 24,
-    //fontFamily: 'Poppins-SemiBold'
+    fontFamily: 'Poppins-SemiBold'
   },
   taskButton: {
     flex: 1,
@@ -80,7 +96,6 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#3D3D4D',
     marginRight: 10
   },
   taskText: {

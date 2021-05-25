@@ -5,9 +5,16 @@ import checkIcon from '../assets/icons/Check.png';
 
 interface TodoInputProps {
   addTask: (task: string) => void;
+  Theme: {
+    background: string;
+    input: string;
+    inputColor: string;
+    colorButton: string;
+  }
 }
 
-export function TodoInput({ addTask }: TodoInputProps) {
+
+export function TodoInput({Theme, addTask }: TodoInputProps) {
   const [task, setTask] = useState('');
 
   function handleAddNewTask() {
@@ -18,10 +25,17 @@ export function TodoInput({ addTask }: TodoInputProps) {
   }
 
   return (
-    <View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow]}>
+    <View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow,
+      { backgroundColor: Theme.input }
+    ]}>
       <TextInput 
-        style={styles.input} 
+        style={[styles.input, {
+          backgroundColor: Theme.input, 
+          color: Theme.inputColor,
+        }]} 
+       
         placeholder="Adicionar novo todo..."
+        placeholderTextColor={Theme.inputColor}
         returnKeyType="send"
         //TODO - use value, onChangeText and onSubmitEditing props
         value={task}
@@ -31,7 +45,9 @@ export function TodoInput({ addTask }: TodoInputProps) {
       <TouchableOpacity
         testID="add-new-task-button"
         activeOpacity={0.7}
-        style={styles.addButton}
+        style={[styles.addButton, {
+          backgroundColor: Theme.colorButton,
+        }]}
         //TODO - onPress prop
         onPress={handleAddNewTask}
       >
@@ -43,7 +59,6 @@ export function TodoInput({ addTask }: TodoInputProps) {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    backgroundColor: '#F5F4F8',
     borderRadius: 5,
     marginTop: -25,
     marginHorizontal: 40,
@@ -53,7 +68,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: '#F5F4F8',
     paddingLeft: 12,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
@@ -71,7 +85,6 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   addButton: {
-    backgroundColor: '#3FAD27',
     height: 50,
     paddingHorizontal: 16,
     justifyContent: 'center',
